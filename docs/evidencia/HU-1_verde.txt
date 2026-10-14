@@ -1,0 +1,13 @@
+test_distinta_fecha_no_es_duplicado (test_expense_duplicados.TestGastoDuplicado.test_distinta_fecha_no_es_duplicado) ... ok
+test_distinta_referencia_no_es_duplicado (test_expense_duplicados.TestGastoDuplicado.test_distinta_referencia_no_es_duplicado) ... ok
+test_distinto_empleado_no_es_duplicado (test_expense_duplicados.TestGastoDuplicado.test_distinto_empleado_no_es_duplicado) ... ok
+test_distinto_monto_no_es_duplicado (test_expense_duplicados.TestGastoDuplicado.test_distinto_monto_no_es_duplicado) ... ok
+test_gasto_rechazado_no_cuenta_como_duplicado (test_expense_duplicados.TestGastoDuplicado.test_gasto_rechazado_no_cuenta_como_duplicado) ... ok
+test_mismo_comprobante_es_duplicado (test_expense_duplicados.TestGastoDuplicado.test_mismo_comprobante_es_duplicado) ... ok
+test_referencia_se_compara_sin_espacios_ni_mayusculas (test_expense_duplicados.TestGastoDuplicado.test_referencia_se_compara_sin_espacios_ni_mayusculas) ... ok
+test_sin_gastos_existentes_no_es_duplicado (test_expense_duplicados.TestGastoDuplicado.test_sin_gastos_existentes_no_es_duplicado) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.000s
+
+OK
