@@ -16,7 +16,7 @@ jobs:
           python-version: "3.12"
       - name: Ruff (configuración heredada de Odoo, ruff.toml)
         run: |
-          pip install ruff
+          pip install "ruff==0.15.10"  # misma versión que docs/evidencia/ruff.txt
           ruff --version
           ruff check addons/hr_expense/models/expense_rules.py addons/hr_expense/tests/test_expense_*.py addons/hr_expense/tests/_pure.py
       - name: Pruebas puras (unittest, sin Odoo)
