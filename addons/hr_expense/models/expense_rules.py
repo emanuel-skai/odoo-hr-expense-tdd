@@ -87,3 +87,27 @@ def validar_transicion(origen, destino):
     if not transicion_valida(origen, destino):
         msg = f"Transición no permitida: {origen} → {destino}"
         raise TransicionInvalida(msg)
+
+
+# ---------------------------------------------------------------------------
+# HU-4 (hallazgo H5): validación de monto
+# ---------------------------------------------------------------------------
+
+class MontoInvalido(ValueError):
+    """El monto del gasto no es un número estrictamente positivo."""
+
+
+def monto_valido(monto):
+    """HU-4: ``True`` solo si ``monto`` es un número mayor que cero."""
+    try:
+        return float(monto) > 0
+    except (TypeError, ValueError):
+        return False
+
+
+def validar_monto(monto):
+    """HU-4: devuelve ``monto`` si es válido; si no, lanza ``MontoInvalido``."""
+    if not monto_valido(monto):
+        msg = f"Monto inválido: {monto!r}. Debe ser mayor que cero."
+        raise MontoInvalido(msg)
+    return monto

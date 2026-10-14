@@ -1,0 +1,10 @@
+test_el_error_informa_el_monto (test_expense_monto.TestValidacionMonto.test_el_error_informa_el_monto) ... ok
+test_monto_cero_es_rechazado (test_expense_monto.TestValidacionMonto.test_monto_cero_es_rechazado) ... ok
+test_monto_negativo_es_rechazado (test_expense_monto.TestValidacionMonto.test_monto_negativo_es_rechazado) ... ok
+test_monto_un_centavo_es_aceptado (test_expense_monto.TestValidacionMonto.test_monto_un_centavo_es_aceptado) ... ok
+test_monto_vacio_es_rechazado (test_expense_monto.TestValidacionMonto.test_monto_vacio_es_rechazado) ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
