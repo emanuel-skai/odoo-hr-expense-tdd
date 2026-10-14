@@ -1,0 +1,7 @@
+# Fase ROJA — HU-3 + HU-4 modelo (antes del código de producción)
+
+ERROR tdd_hr_expense odoo.addons.hr_expense.tests.test_expense_acceso: FAIL: TestAccesoGastosAjenos.test_aprobacion_gasto_ajeno_sin_grupo_da_access_error
+AssertionError: AccessError not raised
+ERROR tdd_hr_expense odoo.addons.hr_expense.tests.test_expense_monto_odoo: FAIL: TestMontoModelo.test_enviar_gasto_con_monto_negativo_es_rechazado
+AssertionError: UserError not raised
+ERROR tdd_hr_expense odoo.tests.result: 2 failed, 0 error(s) of 63 tests when loading database 'tdd_hr_expense' 
