@@ -8,6 +8,8 @@ import werkzeug
 
 from odoo import api, fields, Command, models, _
 from odoo.exceptions import AccessError, RedirectWarning, UserError, ValidationError
+
+from .expense_rules import monto_valido  # Incremento TDD Grupo 1 (HU-4)
 from odoo.fields import Domain
 from odoo.tools import clean_context, email_normalize, float_repr, float_round, format_date, is_html_empty, parse_version
 
@@ -1133,6 +1135,14 @@ class HrExpense(models.Model):
                 raise UserError(_("You do not have the required permission to submit this expense."))
             if not expense.product_id:
                 raise UserError(_("You can not submit an expense without a category."))
+            # HU-4 (hallazgo H5): un monto negativo no entra al flujo de aprobación
+            # (el cero ya lo rechaza la restricción nativa _check_non_zero).
+            if (not monto_valido(expense.total_amount_currency)
+                    and not expense.currency_id.is_zero(expense.total_amount_currency)):
+                raise UserError(_(
+                    "The expense %(name)s has an invalid amount (%(amount)s): it must be greater than zero.",
+                    name=expense.name, amount=expense.total_amount_currency,
+                ))
             if not expense.manager_id:
                 expense.sudo().manager_id = expense._get_default_responsible_for_approval()
         expenses_autovalidated = self.filtered(lambda expense: expense._can_be_autovalidated())
@@ -1371,6 +1381,11 @@ class HrExpense(models.Model):
     # ----------------------------------------
 
     def _check_can_approve(self):
+        # HU-3 (hallazgos H3 y H4): aprobar sin el grupo de aprobador es un
+        # problema de ACCESO, no una advertencia, y no se delega en sudo():
+        # ni siquiera el responsable de gastos designado puede aprobar sin grupo.
+        if not self.env.su and not self.env.user.has_group('hr_expense.group_hr_expense_team_approver'):
+            raise AccessError(_("Only expense approvers (team approver, officer or administrator) can approve expenses."))
         if not all(self.mapped('can_approve')):
             reasons_list = tuple(reason for reason in self._get_cannot_approve_reason().values() if reason)
             reasons = _("You cannot approve:\n %(reasons)s", reasons="\n".join(reasons_list))
