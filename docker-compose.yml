@@ -1,0 +1,31 @@
+# Entorno reproducible para correr la suite de Odoo (TransactionCase) del módulo
+# hr_expense con el incremento del Grupo 1. Uso: scripts/run_odoo_tests.sh
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+      POSTGRES_DB: postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U odoo"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+  odoo:
+    image: odoo:19
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    volumes:
+      - ./addons:/mnt/extra-addons:ro
+    # La copia de trabajo de hr_expense (./addons) va primero en el addons-path:
+    # reemplaza al hr_expense empaquetado en la imagen.
+    command: >
+      odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
+           -d tdd_hr_expense -i hr_expense --test-tags /hr_expense
+           --stop-after-init --log-level=test --without-demo=False
