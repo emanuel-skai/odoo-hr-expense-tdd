@@ -23,10 +23,10 @@ services:
       PASSWORD: odoo
       TEST_TAGS: ${TEST_TAGS:-/hr_expense}
     volumes:
-      - ./addons:/mnt/extra-addons:ro
-    # La copia de trabajo de hr_expense (./addons) va primero en el addons-path:
-    # reemplaza al hr_expense empaquetado en la imagen.
+      # La copia de trabajo se monta ENCIMA del hr_expense empaquetado en la imagen:
+      # odoo.addons resuelve primero su propio directorio, así que un addons-path
+      # extra no basta para reemplazar un módulo que ya trae la imagen.
+      - ./addons/hr_expense:/usr/lib/python3/dist-packages/odoo/addons/hr_expense:ro
     command: >
-      odoo --addons-path=/mnt/extra-addons,/usr/lib/python3/dist-packages/odoo/addons
-           -d tdd_hr_expense -i hr_expense --test-tags ${TEST_TAGS:-/hr_expense}
+      odoo -d tdd_hr_expense -i hr_expense --test-tags ${TEST_TAGS:-/hr_expense}
            --stop-after-init --log-level=test --without-demo=False
