@@ -29,7 +29,7 @@ El repositorio es autocontenido: las pruebas puras corren con Python; la suite d
 
 | ID | Historia | Criterio de aceptación | Dónde |
 |---|---|---|---|
-| HU-1 | Detectar gasto duplicado (mismo empleado, referencia, fecha y monto) | `es_gasto_duplicado` devuelve verdadero cuando coinciden los cuatro campos con un gasto no rechazado y falso si difiere cualquiera; mínimo 5 pruebas, incluido el caso rechazado. | `models/expense_rules.py`, `tests/test_expense_duplicados.py` (8 pruebas) |
+| HU-1 | Detectar gasto duplicado (mismo empleado, referencia, fecha y monto) | `es_gasto_duplicado` devuelve verdadero cuando coinciden los cuatro campos con un gasto no rechazado y falso si difiere cualquiera; mínimo 5 pruebas, incluido el caso rechazado. | `models/expense_rules.py`, `tests/test_expense_duplicados.py` (9 pruebas) |
 | HU-2 | Solo transiciones de estado permitidas | borrador→enviado, enviado→aprobado o rechazado, aprobado→contabilizado, contabilizado→pagado se aceptan; cualquier otro par lanza error. Se prueba el 100 % de los pares (36). | `models/expense_rules.py`, `tests/test_expense_transiciones.py` (5 pruebas, 36 pares) |
 | HU-3 | Un empleado sin privilegios no puede ver, modificar ni aprobar gastos ajenos | Tres pruebas con `TransactionCase`: lectura, escritura y aprobación de un gasto ajeno por un usuario sin grupo producen `AccessError`. | `models/hr_expense.py`, `tests/test_expense_acceso.py` (3 pruebas) |
 | HU-4 | Rechazar montos no positivos | -0,01 y 0 se rechazan; 0,01 se acepta. | `models/expense_rules.py`, `tests/test_expense_monto.py` (5 pruebas puras) y `tests/test_expense_monto_odoo.py` (2 pruebas de modelo) |
@@ -47,7 +47,7 @@ El repositorio es autocontenido: las pruebas puras corren con Python; la suite d
 ## 5. Cómo ejecutar
 
 ```bash
-# Pruebas puras (HU-1, HU-2, HU-4): solo Python 3.10+
+# Pruebas puras (HU-1, HU-2, HU-4): solo Python 3.10+ (19 pruebas, < 1 s)
 scripts/run_pure_tests.sh
 
 # Análisis estático
@@ -55,6 +55,7 @@ ruff check addons/hr_expense/models/expense_rules.py addons/hr_expense/tests/tes
 
 # Suite completa de Odoo (incluye HU-3 y HU-4 de modelo): Docker
 scripts/run_odoo_tests.sh                      # toda la suite de hr_expense
+scripts/run_coverage.sh                        # la misma suite bajo coverage.py → docs/evidencia/cobertura.txt
 TEST_TAGS="/hr_expense:TestAccesoGastosAjenos" scripts/run_odoo_tests.sh hu3   # una clase
 ```
 
@@ -74,6 +75,7 @@ Los archivos de `docs/evidencia/` registran cada fase:
 | `HU-3_HU-4_rojo.resumen.log` | Suite en Docker con las pruebas de modelo nuevas: 2 fallos de 63 (`AccessError not raised`, `UserError not raised`). |
 | `HU-3_HU-4_verde.resumen.log` | Suite final con el incremento: 0 fallos, 0 errores de 63 pruebas. |
 | `ruff.txt` | Análisis estático sin hallazgos sobre el código nuevo. |
+| `cobertura.txt` | Cobertura con coverage.py: 80 % del módulo (1 511 sentencias) con la suite de Odoo y 100 % de `models/expense_rules.py` con las pruebas puras. Se genera con `scripts/run_coverage.sh`. |
 
 **Defectos reales encontrados por las pruebas (fase roja de HU-3 y HU-4).** Las 58 pruebas originales del módulo no cubrían dos comportamientos que el incremento corrige con el mínimo código posible:
 

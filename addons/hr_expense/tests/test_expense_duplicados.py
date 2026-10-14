@@ -51,6 +51,11 @@ class TestGastoDuplicado(unittest.TestCase):
         nuevo = dict(self.existente)
         self.assertFalse(es_gasto_duplicado(nuevo, [rechazado]))
 
+    def test_el_propio_registro_no_es_su_duplicado(self):
+        """Al editar un gasto ya guardado, compararlo consigo mismo (mismo id) no es duplicado."""
+        guardado = dict(self.existente, id=42)
+        self.assertFalse(es_gasto_duplicado(guardado, [guardado]))
+
     def test_sin_gastos_existentes_no_es_duplicado(self):
         self.assertFalse(es_gasto_duplicado(dict(self.existente), []))
 

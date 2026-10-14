@@ -1,0 +1,46 @@
+# Cobertura de pruebas — módulo hr_expense (Odoo 19.0, imagen odoo:19 20260908)
+# 2026-10-14T19:16Z
+
+## A) Suite de Odoo (63 pruebas, TransactionCase + HttpCase) bajo coverage.py — scripts/run_coverage.sh
+## Resultado de la suite en esta corrida: 0 failed, 0 error(s) of 63 tests (ver HU-3_HU-4_verde.resumen.log)
+
+
+Name                                                                                           Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------------------------------------------------------
+hr_expense/__init__.py                                  3      0   100%
+hr_expense/controllers/__init__.py                      1      0   100%
+hr_expense/controllers/webmanifest.py                   7      4    43%   9-22
+hr_expense/models/__init__.py                          15      0   100%
+hr_expense/models/account_move.py                      59     17    71%   16-17, 35, 38-49, 60, 63-70
+hr_expense/models/account_move_line.py                 27      6    78%   24-27, 31, 42
+hr_expense/models/account_payment.py                   27      6    78%   35-36, 40-43
+hr_expense/models/account_tax.py                       24      0   100%
+hr_expense/models/analytic.py                          20      3    85%   22-24
+hr_expense/models/expense_rules.py                     36     20    44%   18, 24, 39-46, 82, 87-89, 104-105, 110-113
+hr_expense/models/hr_department.py                      9      4    56%   12-15
+hr_expense/models/hr_employee.py                       36     13    64%   34-51, 64
+hr_expense/models/hr_employee_public.py                18     12    33%   11-28
+hr_expense/models/hr_expense.py                       872    149    83%   56, 304, 362-375, 472-473, 511, 673, 707-720, 813, 817, 821, 835-837, 861, 970-982, 987, 991, 993, 996-1002, 1052-1053, 1057, 1078, 1086, 1094, 1126-1128, 1135, 1164-1166, 1171-1172, 1186, 1194-1195, 1211, 1232, 1237, 1247, 1256-1283, 1286-1287, 1311, 1322, 1330-1332, 1340, 1342, 1362-1370, 1430-1442, 1448-1449, 1453, 1455, 1459, 1462, 1488, 1491, 1535, 1550, 1653, 1785-1806, 1815-1822, 1827, 1829, 1836-1851
+hr_expense/models/ir_actions_report.py                 39     32    18%   12-54
+hr_expense/models/ir_attachment.py                     24      0   100%
+hr_expense/models/product_product.py                   27      0   100%
+hr_expense/models/product_template.py                  24      1    96%   15
+hr_expense/models/res_company.py                        5      0   100%
+hr_expense/models/res_config_settings.py               36     17    53%   32-38, 41-59, 63, 67, 70-73
+hr_expense/wizard/__init__.py                           6      0   100%
+hr_expense/wizard/account_payment_register.py          17      2    88%   17, 30
+hr_expense/wizard/hr_expense_approve_duplicate.py      17      8    53%   19-22, 25-26, 29-30
+hr_expense/wizard/hr_expense_post_wizard.py            36      2    94%   20, 47
+hr_expense/wizard/hr_expense_refuse_reason.py          15      6    60%   17-20, 23-24
+hr_expense/wizard/hr_expense_split.py                  68      5    93%   82-85, 96
+hr_expense/wizard/hr_expense_split_wizard.py           43      2    95%   61, 65
+----------------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                           1511    309    80%
+
+## B) Pruebas puras (19 pruebas unittest, sin Odoo) sobre models/expense_rules.py — coverage run -m unittest
+
+Name                                                                                     Stmts   Miss  Cover   Missing
+----------------------------------------------------------------------------------------------------------------------
+hr_expense/models/expense_rules.py      36      0   100%
+----------------------------------------------------------------------------------------------------------------------
+TOTAL                                                                                       36      0   100%
