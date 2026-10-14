@@ -1,0 +1,11 @@
+test_el_conjunto_de_transiciones_validas_es_exactamente_el_del_flujo (test_expense_transiciones.TestTransicionesEstado.test_el_conjunto_de_transiciones_validas_es_exactamente_el_del_flujo) ... ok
+test_el_error_describe_la_transicion (test_expense_transiciones.TestTransicionesEstado.test_el_error_describe_la_transicion) ... ok
+test_estado_desconocido_lanza_error (test_expense_transiciones.TestTransicionesEstado.test_estado_desconocido_lanza_error) ... ok
+test_los_estados_del_flujo_existen (test_expense_transiciones.TestTransicionesEstado.test_los_estados_del_flujo_existen) ... ok
+test_todos_los_pares_origen_destino (test_expense_transiciones.TestTransicionesEstado.test_todos_los_pares_origen_destino)
+Cubre el 100 % de los pares: 6 estados × 6 estados = 36 combinaciones. ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK

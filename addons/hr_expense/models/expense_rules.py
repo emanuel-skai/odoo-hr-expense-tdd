@@ -44,3 +44,46 @@ def es_gasto_duplicado(nuevo, existentes):
         if _mismo_comprobante(nuevo, existente):
             return True
     return False
+
+
+# ---------------------------------------------------------------------------
+# HU-2 (hallazgo H2): máquina de estados del gasto
+# ---------------------------------------------------------------------------
+
+#: Estados del flujo de gastos tal como los describe la historia de usuario.
+ESTADOS = ("borrador", "enviado", "aprobado", "rechazado", "contabilizado", "pagado")
+
+#: Equivalencia con los estados del modelo ``hr.expense`` de Odoo 19.
+ESTADO_ODOO = {
+    "borrador": "draft",
+    "enviado": "submitted",
+    "aprobado": "approved",
+    "rechazado": "refused",
+    "contabilizado": "posted",
+    "pagado": "paid",
+}
+
+#: Únicas transiciones permitidas: cualquier otro par es un error.
+TRANSICIONES_VALIDAS = frozenset({
+    ("borrador", "enviado"),
+    ("enviado", "aprobado"),
+    ("enviado", "rechazado"),
+    ("aprobado", "contabilizado"),
+    ("contabilizado", "pagado"),
+})
+
+
+class TransicionInvalida(ValueError):
+    """La transición de estado solicitada no está permitida por el flujo."""
+
+
+def transicion_valida(origen, destino):
+    """HU-2: ``True`` solo si (origen, destino) es una transición del flujo."""
+    return (origen, destino) in TRANSICIONES_VALIDAS
+
+
+def validar_transicion(origen, destino):
+    """HU-2: lanza ``TransicionInvalida`` si la transición no está permitida."""
+    if not transicion_valida(origen, destino):
+        msg = f"Transición no permitida: {origen} → {destino}"
+        raise TransicionInvalida(msg)

@@ -49,7 +49,7 @@ class TestTransicionesEstado(unittest.TestCase):
         self.assertEqual(set(TRANSICIONES_VALIDAS), PERMITIDAS)
 
     def test_todos_los_pares_origen_destino(self):
-        """Cubre el 100 % de los pares: 6 estados × 6 estados = 36 combinaciones."""
+        """Cubre el 100 % de los pares: 6 estados x 6 estados = 36 combinaciones."""
         pares = list(itertools.product(ESTADOS, ESTADOS))
         self.assertEqual(len(pares), 36)
         for origen, destino in pares:
