@@ -1,0 +1,6 @@
+2026-10-14 12:50:35,435 1 INFO tdd_hr_expense odoo.tests.common: Importing test framework 
+2026-10-14 12:50:36,785 1 INFO tdd_hr_expense odoo.modules.loading: loading 1 modules... 
+2026-10-14 12:50:44,561 1 INFO tdd_hr_expense odoo.modules.loading: loading 57 modules... 
+2026-10-14 12:51:19,886 1 INFO tdd_hr_expense odoo.modules.loading: Modules loaded. 
+2026-10-14 12:51:57,015 1 INFO tdd_hr_expense odoo.tests.stats: hr_expense: 70 tests 19.36s 39965 queries 
+2026-10-14 12:51:57,015 1 INFO tdd_hr_expense odoo.tests.result: 0 failed, 0 error(s) of 58 tests when loading database 'tdd_hr_expense' 
