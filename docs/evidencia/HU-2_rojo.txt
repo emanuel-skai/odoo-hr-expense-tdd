@@ -1,0 +1,26 @@
+test_expense_transiciones (unittest.loader._FailedTest.test_expense_transiciones) ... ERROR
+
+======================================================================
+ERROR: test_expense_transiciones (unittest.loader._FailedTest.test_expense_transiciones)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_expense_transiciones
+Traceback (most recent call last):
+  File "/Users/emanuelhc/Desktop/odoo-hr-expense-tdd/addons/hr_expense/tests/test_expense_transiciones.py", line 11, in <module>
+    from odoo.addons.hr_expense.models.expense_rules import (
+ModuleNotFoundError: No module named 'odoo'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/emanuelhc/anaconda3/lib/python3.11/unittest/loader.py", line 154, in loadTestsFromName
+    module = __import__(module_name)
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/emanuelhc/Desktop/odoo-hr-expense-tdd/addons/hr_expense/tests/test_expense_transiciones.py", line 20, in <module>
+    from expense_rules import (
+ImportError: cannot import name 'ESTADOS' from 'expense_rules' (/Users/emanuelhc/Desktop/odoo-hr-expense-tdd/addons/hr_expense/tests/../models/expense_rules.py)
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)
