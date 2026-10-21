@@ -32,7 +32,7 @@ def _mismo_comprobante(a, b):
         and str(a.get("date") or "") == str(b.get("date") or "")
         and abs(
             float(a.get("amount") or 0)
-            - float(b.get("amount") or 0)
+            - float(b.get("amount") or 0),
         ) < TOLERANCIA_MONTO
     )
 

@@ -68,7 +68,7 @@ class TestGastoDuplicado(unittest.TestCase):
         nuevo = dict(existente)
 
         self.assertFalse(
-            es_gasto_duplicado(nuevo, [existente])
+            es_gasto_duplicado(nuevo, [existente]),
         )
 
     def test_referencia_ausente_no_confirma_duplicado(self):
@@ -76,7 +76,7 @@ class TestGastoDuplicado(unittest.TestCase):
         nuevo = dict(existente)
 
         self.assertFalse(
-            es_gasto_duplicado(nuevo, [existente])
+            es_gasto_duplicado(nuevo, [existente]),
         )
 
     def test_referencia_solo_espacios_no_confirma_duplicado(self):
@@ -84,8 +84,9 @@ class TestGastoDuplicado(unittest.TestCase):
         nuevo = dict(existente)
 
         self.assertFalse(
-            es_gasto_duplicado(nuevo, [existente])
+            es_gasto_duplicado(nuevo, [existente]),
         )
+
 
 if __name__ == "__main__":
     unittest.main()
