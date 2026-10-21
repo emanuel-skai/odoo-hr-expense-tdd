@@ -20,16 +20,15 @@ def _normalizar_referencia(referencia):
 
 def _mismo_comprobante(a, b):
     """Compara comprobantes solo cuando ambos tienen referencia."""
-    if (
-        not _normalizar_referencia(a.get("reference"))
-        or not _normalizar_referencia(b.get("reference"))
-    ):
+    referencia_a = _normalizar_referencia(a.get("reference"))
+    referencia_b = _normalizar_referencia(b.get("reference"))
+
+    if not referencia_a or not referencia_b:
         return False
 
     return (
         a.get("employee_id") == b.get("employee_id")
-        and _normalizar_referencia(a.get("reference"))
-        == _normalizar_referencia(b.get("reference"))
+        and referencia_a == referencia_b
         and str(a.get("date") or "") == str(b.get("date") or "")
         and abs(
             float(a.get("amount") or 0)
